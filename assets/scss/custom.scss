@@ -1,0 +1,13 @@
+/*
+    You can add your own custom styles here.
+*/
+:root {
+    /* Change the color of links in Light Mode */
+    --accent-color: #33a7ff; 
+
+    &[data-scheme="dark"] {
+        /* Change the color of links in Dark Mode */
+        --accent-color: #81c5f8; 
+    }
+}
+
