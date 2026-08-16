@@ -1,0 +1,49 @@
+---
+title: "Throw Teammate Flowchart for BB2025"
+author: "Gertjan Verhoeven"
+date: "2026-03-16"
+summary: I updated my favorite flowchart for Throw Teammate, made by the Red Magician, to the Third Season ruleset (BB2025). Download it here!
+slug: "throw-teammate-flowchart"
+draft: false
+categories:
+- Blood Bowl
+tags:
+- Scalable Vector Graphics
+
+baseurl: "https:/bbscholar.org"
+image: "bb_gnome_banner.png"
+---
+
+Blood Bowl Third Season (aka BB2025) is here! 
+
+In this post, I present the updated version of my favorite Throw Teammate (TTM) Flowchart. A quick Facebook search reveals that there are several, dare I say, many flowcharts for TTM out there. For BB2016 there was even one [on the NAF website](https://www.thenaf.net/wp-content/uploads/2018/02/TTM-flowchart-v3.jpg). For BB2020 there are several, for example one by Mike Davies posted on Facebook.
+
+But my personal favorite is the flowchart made by the Red Magician for BB2020, presented in a [blog post on his own website](https://theredmagician.wordpress.com/2020/10/23/blood-bowl-2020-throw-team-mate-flow-chart-questions/). I found it a few years ago where it is was discussed in [a Reddit post](https://www.reddit.com/r/bloodbowl/comments/jfsvdb/updated_throw_team_mate_chart_for_bb_2020/). 
+
+I like it because for me it has the right balance between compressing some things (such as the Throwing player either being an Ogre, Troll or Tree), but being comprehensive in other things, such as what happens when a thrown player bounces off another player on the field. Also I like the layout, having a large font size and designed to cram everything on a single A4 page that can be printed and laminated. As a result it might come a across a bit messy, we can't have it all.
+
+With the new edition, I contacted the mysterious Red Magician (who replied promptly!) and obtained the source file (a Google Drawing) and his permission to update and share the flowchart. I converted the Google Drawing into a SVG file with embedded fonts that can be edited with Inkscape, an Open Source vector graphics editor, and exported to PDF.
+
+So what's new? I used as a reference a recent BB2025 version, as reviewed and discussed in a  [Reddit post from last december](https://www.reddit.com/r/bloodbowl/comments/1pidinu/updated_throw_teammate_flowchart/). It appears to be somewhat verified by rules lawyers and others from the community.
+
+Changes to TTM involve the outcomes of the Throw, i.e. no more terrible or successful throw, now we have "subpar throw". I also added in the effects of new skills such as **Bullseye** and **Lethal Flight**, and gave the buffed **Swoop** skill a more prominent position, as it is likely to become standard on Goblin teams.
+
+Without further ado, here it is:
+
+![](TTM_bb2025.png)
+
+Let me know if you spot any mistakes.
+
+# Download section
+
+The updated Throw Teammate Flowchart for BB2025 can be downloaded [here](TTM%20Chart%20for%20BB2025.pdf) and the SVG source is available [here](TTM%20Chart%20for%20BB2025.svg) if you want to tinker with it in Inkscape (I used version 1.2).
+
+*Update August 5 2026: Fixed an error with Bullseye. Thanks to David Goodey for spotting the error!*
+
+Note, the text could only be exported as paths (i.e. vector shapes, curse you Google!), the SVG is now a mix of editable text and vector shapes. Be warned!
+
+
+
+
+
+
