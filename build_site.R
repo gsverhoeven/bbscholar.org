@@ -78,27 +78,23 @@ options(blogdown.hugo.version = "0.165.0")
 
 # this compiles all Rmds  and fills ./public in hugo_source
 
-
-#blogdown:::build_rmds("content/post/2020-12-30-jacks_car_rental_gym.Rmd")
-#blogdown:::build_rmds("content/post/2021_03_07_qlearning_frozenlake_convergence.Rmd")
-#blogdown:::build_rmds("content/post/2021-05-02-workflow_scientific_papers.Rmd")
-#blogdown:::build_rmds("content/post/2021_05_14_covid_rapid_test_reliability.Rmd")
 #blogdown:::build_rmds("content/post/2021_12_30_fumbbl_dataset.Rmd")
-#blogdown:::build_rmds("content/post/2022-01-04_java_webstart_forensics_ubuntu.Rmd")
 #blogdown:::build_rmds("content/post/2022-03-20_nufflytics_blog_post.Rmd")
-#blogdown:::build_rmds("content/post/2022-07-09-random_forest_rfe_vs_tuning.Rmd")
 #blogdown:::build_rmds("content/post/2022-11-01_clustered_heatmaps_blood_bowl.Rmd")
 #blogdown:::build_rmds("content/post/2023-03-01_fumbbl_rosters_blood_bowl.Rmd")
 #blogdown:::build_rmds("content/post/2023-09-21_fumbbl_super_league.Rmd")
-#blogdown:::build_rmds("content/post/2024-01-15-stan_in_azure_vm.Rmd")
 #blogdown:::build_rmds("content/post/2024-08-01_fumbbl_replays_blog_post.Rmd")
 #blogdown:::build_rmds("content/post/2025-04-29_fumbbl_league_team_development.Rmd")
-#blogdown:::build_rmds("content/post/2026-01-24_third_season_roster_popularity.Rmd")
-#blogdown:::build_rmds("content/post/2026-02-13_welsh_nationals_roster_analysis.Rmd")
 
+
+
+
+options(blogdown.hugo.version = "0.165.0")
 options(blogdown.method = "markdown")
 
-blogdown:::build_rmds("content/post/throw-teammate-flowchart/index.Rmd")
+blogdown:::build_rmds("content/post/third-season-race-popularity/index.Rmd")
+#blogdown:::build_rmds("content/post/welsh-nationals/index.Rmd")
+#blogdown:::build_rmds("content/post/throw-teammate-flowchart/index.Rmd")
 # rebuild site
 
 #The function blogdown::build_site() has an argument local that defaults to FALSE, which means building the website for publishing instead of local previewing
