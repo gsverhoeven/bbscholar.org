@@ -13,7 +13,7 @@ tags:
 - Python
 - Selenium
 baseurl: https://gsverhoeven.github.io
-#image: bb_gnome_banner.png
+image: bb_gnome_banner.png
 preview: false
 ---
 

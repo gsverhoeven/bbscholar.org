@@ -2,3 +2,11 @@ public
 .hugo_build.lock
 resources
 
+content/post/clustered-heatmap-races/fumbbl_datasets/df_mbt.csv
+/content/post/fumbbl-nufflytics/data
+content/post/fumbbl-nufflytics/nufflytics_blog_post.mdx
+content/post/fumbbl-nufflytics/nufflytics_blog_post_.ipynb
+content/post/fumbbl-nufflytics/nufflytics_blog_post.ipynb
+/content/post/fumbbl-roster-plots/code
+/content/post/fumbbl-roster-plots/data
+/content/post/fumbbl-roster-plots/plots/svg_source
