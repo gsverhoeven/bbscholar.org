@@ -22,9 +22,11 @@
         </h2>
     
         {{ with $Page.Params.summary }}
-        <h3 class="article-subtitle">
-            {{ . | markdownify }}
-        </h3>
+        {{ if $IsList}}
+		<h3 class="article-subtitle">
+		    {{ . | markdownify }}
+		</h3>
+	{{ end }}
         {{ end }}
     </div>
 
