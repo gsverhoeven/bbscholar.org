@@ -78,21 +78,18 @@ options(blogdown.hugo.version = "0.165.0")
 
 # this compiles all Rmds  and fills ./public in hugo_source
 
-#blogdown:::build_rmds("content/post/2021_12_30_fumbbl_dataset.Rmd")
-#blogdown:::build_rmds("content/post/2022-03-20_nufflytics_blog_post.Rmd")
-#blogdown:::build_rmds("content/post/2022-11-01_clustered_heatmaps_blood_bowl.Rmd")
-#blogdown:::build_rmds("content/post/2023-03-01_fumbbl_rosters_blood_bowl.Rmd")
-#blogdown:::build_rmds("content/post/2023-09-21_fumbbl_super_league.Rmd")
-#blogdown:::build_rmds("content/post/2024-08-01_fumbbl_replays_blog_post.Rmd")
-#blogdown:::build_rmds("content/post/2025-04-29_fumbbl_league_team_development.Rmd")
-
-
-
 
 options(blogdown.hugo.version = "0.165.0")
 options(blogdown.method = "markdown")
 
-blogdown:::build_rmds("content/post/third-season-race-popularity/index.Rmd")
+#blogdown:::build_rmds("content/post/gnome-team-development-plots/index.Rmd") # This is a Jupyter notebook
+#blogdown:::build_rmds("content/post/fumbbl-replays/index.Rmd") # This is a Jupyter notebook
+#blogdown:::build_rmds("content/post/fumbbl-roster-plots/index.Rmd")
+#blogdown:::build_rmds("content/post/fumbbl-dataset/index.md") # This is a Jupyter notebook
+#blogdown:::build_rmds("content/post/fumbbl-nufflytics/index.md") # This is a Jupyter notebook
+#blogdown:::build_rmds("content/post/super-league/index.Rmd")
+#blogdown:::build_rmds("content/post/clustered-heatmap-races/index.Rmd")
+#blogdown:::build_rmds("content/post/third-season-race-popularity/index.Rmd")
 #blogdown:::build_rmds("content/post/welsh-nationals/index.Rmd")
 #blogdown:::build_rmds("content/post/throw-teammate-flowchart/index.Rmd")
 # rebuild site
