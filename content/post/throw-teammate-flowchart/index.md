@@ -6,12 +6,11 @@ summary: I updated my favorite flowchart for Throw Teammate, made by the Red Mag
 slug: "throw-teammate-flowchart"
 draft: false
 categories:
-- Blood Bowl
+- Throw Teammate
 tags:
 - Scalable Vector Graphics
-
 baseurl: "https:/bbscholar.org"
-image: "bb_gnome_banner.png"
+image: "ttm_banner.png"
 ---
 
 Blood Bowl Third Season (aka BB2025) is here! 

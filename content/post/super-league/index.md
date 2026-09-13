@@ -4,27 +4,20 @@ author: "Gertjan Verhoeven"
 date: '2023-09-21'
 summary: Yet another Blood Bowl post! This one is to introduce the Super League, the
   ultimate tournament-style Blood Bowl available online.
-slug: blood-bowl-super-league
+slug: fumbbl-super-league
 draft: no
 categories:
-- Blood Bowl
 - Statistics
 tags:
 - R
 - ggplot2
 baseurl: https://bbscholar.org
-image: bb_heatmap_banner.png
+image: bb_super_league_banner.png
 preview: no
 ---
 
 
-
-
-
-
-*(Photo by [Erik Cats](https://twitter.com/erikcats))*
-
-Yet another Blood Bowl post! If you don't know about Blood Bowl and/or FUMBBL, See my [previous blog posts on Blood Bowl](https://bbscholar.org/categories/blood-bowl/) for more background and stats. 
+Yet another Blood Bowl post! If you don't know about Blood Bowl and/or FUMBBL, See my [previous blog posts on Blood Bowl](https://bbscholar.org/) for more background and stats. 
 
 This one is to introduce the Super League, where top (and not so top) coaches compete with each other online on FUMBBL. The Super League is a system of interconnected leagues, in a pyramid-like system. This is not uncommon in sports, a well known example is the English Football league system, also called the "football pyramid".
 The creator and tireless promotor of this league, the infamous **Tripleskull** from Denmark, asked me to do some data analysis on the SL, with this blog as a result.

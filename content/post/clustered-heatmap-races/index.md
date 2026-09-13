@@ -15,7 +15,7 @@ tags:
 - hclust
 - heatmap
 baseurl: https://bbscholar.org
-image: bb_heatmap_banner.png
+image: bb_scatterplot_banner.png
 preview: no
 ---
 

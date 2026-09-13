@@ -12,8 +12,7 @@ tags:
 - Python
 - Pandas
 baseurl: https://bbscholar.org
-
-image: bloodbowl_dataset.png
+image: nufflytics_header.png
 preview: no
 ---
 
@@ -25,7 +24,7 @@ There exists a lively tournament scene, with thousands of matches played each ye
 
 The idea of this blog post is to showcase some possible analyses that can be done on the [FUMBBL match data I've compiled](https://bbscholar.org/post/fumbbl-dataset/). The idea is to make Blood Bowl data analysis (also know as [Nufflytics](https://nufflytics.com), a term coined by Blood Bowler "Schlice" in reference to Nuffle, the god of Blood Bowl) easier and more accessible to others. I took inspiration from various sources, detailed at the end of this post. So lets dive in the world of Blood Bowl stats nerdery.
 
-# Getting started with the data
+## Getting started with the data
 
 Since the previous blog post on FUMBBL data, I decided to make a separate Github repository [fumbbl_datasets](https://github.com/gsverhoeven/fumbbl_datasets) that contains the Python code to fetch and construct the FUMBBL datasets. You can either download the latest datasets manually, or clone the entire repo to your local drive, depending on your expertise and preferences.
 
@@ -53,7 +52,7 @@ target = 'datasets/v0.2/inducements.h5'
 inducements = pd.read_hdf(path_to_datasets + target) 
 ```
 
-# What data do we have? Weekly game volumes
+## What data do we have? Weekly game volumes
 
 
 Let's see what we've got! The pandas DataFrame `df_matches` contains records for all matches played on FUMBBL between august 2020 and march 2022.
@@ -100,7 +99,7 @@ Both plots looked identical at the time of writing, so it seems that we have a c
 The effect of starting the new BB2020 Competitive division is clearly visible, with the weekly game volume almost doubling in september 2021.
 The first online NAF tournament using BB2020 rules is also visible, running for 6 weeks in October / November 2021.
 
-# Star player usage on FUMBBL
+## Star player usage on FUMBBL
 
 We can also look at the percentage of matches that involve star players.
 I used the various plot aesthetics like symbol shape and size to encode the game volume and ruleset (BB2016 or BB2020 based).
@@ -151,7 +150,7 @@ Through Googling and using the Wayback Machine, I was able to find the rulepacks
 
 In contrast, in the GBFU tournament, the first online NAF tournament using the BB2020 rules, only some 15% of matches involved at least one star player. 
 
-# Are coach ratings predictive of match outcomes?
+## Are coach ratings predictive of match outcomes?
 
 For the main divisions on FUMBBL, ELO style coach ratings are available that are updated after each game.
 The coach rankings are explained on [this help page](https://fumbbl.com/help:Ranking).
@@ -210,7 +209,7 @@ res['perc'] = res['n_games']/res['n_games_bin']
 
 From above graphs, we can conclude that the coach ratings work as expected, with large coach rating differences indeed showing high win rates for the higher ranked coach. From this we can infer that a highly skilled coach will win 9 times out of ten agains a below average coach. We call Blood Bowl a Strategy game for a reason!
 
-# What about the passing game in BB2020?
+## What about the passing game in BB2020?
 
 With Blood Bowl 2020 also came a large change to passing the ball. Passing is no longer linked to the **Agility** statistics, but now has its own **Passing** (PA) stat. Overall, passing became riskier, and high agility teams do not automatically have good passing stats. For example, only a High Elf thrower has a PA of 2+, whereas the rest of the players have a PA of 4+ or higher. On the Dark Elf team, the player with the best PA stat is the runner, with a PA of 3+, without a built in re-roll. So we can expect quite some changes in the number of completions per match. For more detail I refer to a nice post by king_ghidra at [Blood Bowl Strategies](https://bloodbowlstrategies.com/en/tactics-blood-bowl-second-season/).
 
@@ -318,7 +317,7 @@ Observations that stand out:
 * High Elves are hardly affected, as well as Humans,
 * Halflings show a large increase.
 
-# And what about fouling in BB2020?
+## And what about fouling in BB2020?
 
 Also for fouling Blood Bowl 2020 brought some changes to the rules. The **Sneaky Git** skill became better, allowing a player to continue moving after the foul has been committed. The **Black Orcs** were added as a new team, that show fouling potential: they have access to cheap bribes, the **Grab** skill to set up a foul, and cheap goblin bruisers to quickly move around the pitch. And there was of course the **swarming** for the Underworld and Snotling teams, that provides a continuous supply of disposable players to foul with. For more detail I refer to a nice post by king_ghidra at [Blood Bowl Strategies](https://bloodbowlstrategies.com/en/tactics-blood-bowl-second-season/).
 
@@ -372,7 +371,7 @@ res = res.dropna()
 
 From this plot, we can see that BB2020 indeed shows increased fouling across the board. As expected, the Black Orcs are high up in the fouling charts, and we see large increases in fouling for Underworld, Goblins, Halflings and Snotlings. We can also see that as teams develop, fouling typically increases, possible related to developing a specialized fouling player with the sneaky git skill. For humans access to cheap agile halfling hopefulls with access to sneaky git increased fouling opportunity. In Orc teams goblins can forfill this role.
 
-# Competitive division win rates and Malta Eurobowl 2022 tiers
+## Competitive division win rates and Malta Eurobowl 2022 tiers
 
 Last but not least, a win rate analysis. In a tournament setting, elaborate tiering systems are in place to compensate for differences in race strength, skills are selected from skill packs, and player casualties are forgotten with each match played with a "resurrected" fresh team. Furthermore, opponents are randomly assigned and must be played. Contrast this with the FUMBBL Competitive division: Here teams start with 1M gold and without any extra skills. Teams must be developed, like in a league, and opponents can be strategically chosen based on which race they play, their coach rating etc. 
 
@@ -449,7 +448,7 @@ What else do we got:
 * High Elf has a low tier, but shows an above average win rate, and appears to perform well at NAF tournaments. Curious to see how this race will do this year.
 
 
-# Concluding Remarks and acknowledgements
+## Concluding Remarks and acknowledgements
 
 The analyses above hopefully give you some idea what can be with the rich FUMMBL data available.
 

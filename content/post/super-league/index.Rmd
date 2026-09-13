@@ -13,7 +13,7 @@ tags:
 - R
 - ggplot2
 baseurl: https://bbscholar.org
-image: bb_heatmap_banner.png
+image: bb_superleague_banner.png
 preview: no
 ---
 

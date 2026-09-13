@@ -6,11 +6,10 @@ summary: This blogpost is about **Blood Bowl**, a boardgame I started playing la
   year. The goal of this blog post is to use Python API and HTML scraping to fetch
   Blood Bowl match outcome data from FUMBBL.com, and to create a structured dataset
   ready for analysis and visualization.
-slug: blood-bowl-fumbbl-dataset
+slug: fumbbl-dataset
 draft: no
 categories: 
 - Data paper
-- Blood Bowl
 tags:
 - Python
 - Pandas
@@ -32,7 +31,7 @@ To give an impression of how this works out in practice, here are two examples: 
 
 *Chavan, V., and Penev, L. (2011). The data paper: a mechanism to incentivize data publishing in biodiversity science. BMC Bioinformatics 12(Suppl. 15):S2. doi:10.1186/1471-2105-12-S15-S2
 
-# Software needed to reproduce this blog post
+## Software needed to reproduce this blog post
 
 This blogpost is written as a Jupyter notebook containing Python code, and is fully reproducible. The idea is to make Blood Bowl data analysis accessible to others. Using open source tooling reduces the barriers for others to build on other people's work. 
 
@@ -49,14 +48,14 @@ pd.set_option('display.max_rows', 500)
 pd.set_option('display.max_columns', 500)
 ```
 
-# Blood Bowl online: FUMBBL 
+## Blood Bowl online: FUMBBL 
 
 The **FUMBBL** website (https://fumbbl.com) contains a large amount of data. From coach pages, with their teams, to team rosters, with players, and match histories. It's all there.
 
 To obtain **FUMBBL** data, we need to fetch it match by match, team by team. To do so, the site creator Christer Kaivo-oja, from Sweden, has made an API that allows us to easily fetch data. What follows is a short demonstration how the API works, before we fetch the **FUMBBL** match and team data of the last 12 months.
  
 
-# Behold, the power of Requests
+## Behold, the power of Requests
 I use the [Python **Requests** library](https://docs.python-requests.org/en/latest/) to make the API call over HTTPS and obtain the response from the FUMBLL server. The response is in the JSON format, a [light-weight data-interchange format](https://www.json.org/json-en.html) which is both easy to read and write for humans, and easy to parse and generate by computers. So this makes it a natural choice for an API.
 
 Here is an example of what is available at the coach level. The full documentation of the API can be found at (https://fumbbl.com/apidoc/).
@@ -257,7 +256,7 @@ response.json()
 
 
 
-# Parsing JSON data
+## Parsing JSON data
 
 Let's have a closer look at the JSON data structure here.
 We have a list of key-value pairs. 
@@ -309,7 +308,7 @@ response.json()['teams'][2]['name']
 
 
 
-# What data do we need? And in what shape?
+## What data do we need? And in what shape?
 
 Now we know how the data comes in, we need to think about which variables we want, and how to structure them.
 The most straightforward level to analyze race strength is to look at **match outcomes**.
@@ -331,7 +330,7 @@ So lets get the match data!
 
 
 
-# Step 1: API scraping the match data: df_matches
+## Step 1: API scraping the match data: df_matches
 
 So we are mostly interested in the current ruleset, this is `BB2020`. This ruleset became available for play on **FUMBBL** at september 1st 2021, and two months later, already some 5000 games have been played. We also want to compare with the previous ruleset, where we have much more data available. How far do we go back? 
 Let's go for roughly 12 months of `BB2016` ruleset matches, and a few months of `BB2020` matches.
@@ -480,7 +479,7 @@ df_matches.loc[df_matches['team1_race_name'] == "Khorne", 'team1_race_name'] = '
 df_matches.loc[df_matches['team2_race_name'] == "Khorne", 'team2_race_name'] = 'Daemons of Khorne'
 ```
 
-## Dataprep: transforming the team values
+### Dataprep: transforming the team values
 
 In Blood Bowl, teams can develop themselves over the course of multiple matches. The winnings of each match can be spend on buying new, stronger players, or replace the players that ended up getting injured or even killed. In addition, players receive so-called *star player points (SPP)* for important events, such as scoring, or inflicting a casualty on the opponent. Therefore, a balancing mechanism is needed when a newly created "rookie" team is facing a highly developed opposing team with lots of extra skills and strong players. 
 
@@ -516,7 +515,7 @@ df_matches['tv_bin'] = pd.cut(df_matches['tv_match'],
 
 ```
 
-## Dropping empty matches
+### Dropping empty matches
 
 Some match_id's do not have match information attached to them, presumably these matches were not played or some real life event interfered. These match_ids are dropped from the dataset to get rid of the NAs in all the columns.
 
@@ -538,7 +537,7 @@ len(df_matches)
 
 
 
-## Dataprep: getting the dates right
+### Dataprep: getting the dates right
 
 To see time trends, its useful to aggregate the data by week. For this we add `week_number` for each date, and from this week number, we convert back to a date to get a `week_date`. This last part is useful for plotting with `plotnine`, as this treats dates in a special way. We use the ISO definition of week, this has some unexpected behavior near the beginning / end of each year, that we fix manually. 
 
@@ -567,7 +566,7 @@ df_matches.loc[(df_matches['week_date'] == '2021-01-04') & (df_matches['week_num
 
 ```
 
-# Step 2: HTML Scraping the inducements and coach rankings for each match
+## Step 2: HTML Scraping the inducements and coach rankings for each match
 
 Next, we collect for all the matches in `df_matches` the **inducements** and **coach rankings**. 
 This information is not available through the API, but is presented on a HTML page at https://fumbbl.com/FUMBBL.php?page=match&id=4350014 summarizing information for in this case match 4350014.
@@ -716,7 +715,7 @@ df_inducements.query("match_id == 4347799")
 
 
 
-## Dataprep: coach rankings
+### Dataprep: coach rankings
 
 We want to extract the part `CR 152.53` from the scraped coach information field. Just as we matched on `Inducements:`, we can match on `CR ` and grab the contents directly after that, stopping when we encounter a whitespace.
 
@@ -789,7 +788,7 @@ df_inducements.dtypes
 
 
 
-## Dataprep match inducements for each team
+### Dataprep match inducements for each team
 
 The next trick is to use `pandas` `explode()` method (similar to `separate_rows()` in `tidyverse` R) to give each inducement its own row in the dataset.
 This creates a dataframe (`inducements`) similar to `df_mbt` with each match generating at least two rows.
@@ -825,7 +824,7 @@ inducements.loc[inducements['inducements'].str.contains("Card"), 'special_card']
 
 ```
 
-## Add inducement info to df_matches
+### Add inducement info to df_matches
 
 Here we add `df_inducements` to `df_matches`. This contains each players inducements as a single string, not convenient for analysis.
 
@@ -848,7 +847,7 @@ df_matches = pd.merge(df_matches, df_sp, on = "match_id", how = "left")
 df_matches['match_id'] = pd.to_numeric(df_matches.match_id) 
 ```
 
-# Step 3: Create matches by team DataFrame
+## Step 3: Create matches by team DataFrame
 
 When analyzing the data, we also like to have a dataframe `df_mbt (df_matches_by_team)` that contains, for each match, a separate row for each team participating in that match.
 This structure is nicely visualized [at the Nufflytics blog](https://www.nufflytics.com/post/the-value-of-tv/).
@@ -875,7 +874,7 @@ team1_data.columns = team2_data.columns = ['match_id', 'match_date', 'week_numbe
 df_mbt = pd.concat([team1_data, team2_data])
 ```
 
-## Adding outcome weights
+### Adding outcome weights
 
 One way to measure team strength is to calculate a win rate.
 If we want to calculate win rates, we need to decide how to weigh a draw.
@@ -1204,7 +1203,7 @@ df_mbt.query("coach_id == 255851").sort_values('match_date')
 
 Great! Almost there. There is still something missing though, we need to know, for all the teams in our matches dataset, in what division or league they are playing, and what version of the rules they use. For these we turn to the API again, to fetch more data, now on the team level.
 
-# Step 4: Fetch data on team division and ruleset
+## Step 4: Fetch data on team division and ruleset
 
 Let grab for all teams in `df_mbt` the team **division** and **ruleset**.
 
@@ -1290,7 +1289,7 @@ df_teams.shape
 
 
 
-## Dataprep: Add ruleset_version and division_name
+### Dataprep: Add ruleset_version and division_name
 
 FUMBBL allows coaches to create their own rulesets to play their own leagues and tournaments with. For example, there is a so-called "Secret League" where coaches can play with "Ninja halflings", "Ethereal" spirits etc. Instead of plain normal regular "Halflings" and "Shambling Undead" :-)
 
@@ -1481,7 +1480,7 @@ df_teams['ruleset'] = pd.to_numeric(df_teams.ruleset)
 
 
 
-## Dataprep: Merging the match data with the team data
+### Dataprep: Merging the match data with the team data
 
 For each match in the `df_mbt` **DataFrame** we can now add the team-level information from `df_teams`.
 
@@ -1500,7 +1499,7 @@ df_matches['team1_id'] = pd.to_numeric(df_matches.team1_id)
 df_matches = df_matches.drop('team_id', 1)
 ```
 
-# Step 5: adding team tiers
+## Step 5: adding team tiers
 
 According to [this article from the NAF from 2017](https://www.thenaf.net/2017/05/tiers/), already since 2010 efforts were made to balance things out a bit between the different team strengths. For example, the weaker teams get more gold to spend on players, or get more so-called "Star player points" to spend on skilling players up. According to [the NAF](https://www.thenaf.net/tournaments/information/tiers-and-tiering/), traditionally team tiering consists of three groups, with Tier 1 being the strongest teams, and tier 3 the weakest teams. The GW BB2020 rule book also contains three tier groups, that are similar to the NAF tiers: except for Humans and Old World Alliance. And in november 2021, Games Workshop published an update of the three tier groups, now with High Elves moving from tier 2 to tier 1, and Old World Alliance moving back to tier 2.
 
@@ -1521,7 +1520,7 @@ df_mbt = pd.merge(df_mbt, race_tiers, on='race_name', how='left')
 
 ```
 
-# Save all prepped datasets as HDF5 files
+## Save all prepped datasets as HDF5 files
 
 
 
@@ -1548,7 +1547,7 @@ df_mbt.to_hdf(target, key='df_mbt', mode='w', format = 't',  complevel = 9)
 
 ```
 
-# Choosing a license for the public dataset
+## Choosing a license for the public dataset
 
 An important part of making data publicly available is being explicit about what is allowed if people want to use the dataset.
 However, before we do so, we have to check if **we** are actually allowed to publish the data. This is explained nicely [in a blogpost by Elizabeth Wickes](https://datacarpentry.org/blog/2016/06/data-licensing).

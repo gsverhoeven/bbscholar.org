@@ -13,7 +13,7 @@ tags:
 - Python
 - Selenium
 baseurl: "https:/bbscholar.org"
-image: "bb_gnome_banner.png"  
+image: "bb_heatmap_banner.png"  
 
 ---
 

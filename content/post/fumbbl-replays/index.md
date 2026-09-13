@@ -12,7 +12,7 @@ tags:
 - Python
 - Pandas
 baseurl: https://bbscholar.org
-image: bb_heatmap_banner.png
+image: images/fumbbl_replays_23_0.png
 preview: no
 ---
 
@@ -23,12 +23,14 @@ In addition, it has some functionality to analyze FUMBBL game logs.
 On the FUMBBL website, a lot of high quality replay data is available as well as an API to conveniently fetch the data.
 In addition, the API provides up to date roster information.
 To do useful analyses (aka nufflytics) in Python with this data, we need a utility package / library.
-In R, a similar package exists to work with BB2 replays [https://github.com/nufflytics/nufflytics].
+In R, a similar package exists to work with BB2 replays [https://github.com/nufflytics/nufflytics](https://github.com/nufflytics/nufflytics).
 For BB3 replay files, work is ongoing to process them, with a [proof-of-concept example C# Github repo available](https://github.com/tagsemb/bbrdecode).
 
 We also need a standard way to describe Blood Bowl games in a compact way, that is both human and machine readable.
 In chess, there is the **Portable Game Notation (PGN)**. PGN has become the de facto standard of describing Chess games.
-For Blood Bowl, already in 2002 some work has been done towards this end. David Morgan-Mar developed a notation for the purpose of sharing Blood Bowl game logs over the internet. [https://www.dangermouse.net/games/bloodbowl/rules.html]
+For Blood Bowl, already in 2002 some work has been done towards this end. 
+David Morgan-Mar developed a notation for the purpose of sharing Blood Bowl game logs over the internet. 
+[https://www.dangermouse.net/games/bloodbowl/rules.html](https://www.dangermouse.net/games/bloodbowl/rules.html)
 
 If we could converge on a standard **Fantasy Football Game Notation (FFGN)**, it would serve many purposes, e.g.:
 

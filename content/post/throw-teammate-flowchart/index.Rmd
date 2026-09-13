@@ -6,7 +6,7 @@ summary: I updated my favorite flowchart for Throw Teammate, made by the Red Mag
 slug: "throw-teammate-flowchart"
 draft: false
 categories:
-- Blood Bowl
+- Throw Teammate
 tags:
 - Scalable Vector Graphics
 

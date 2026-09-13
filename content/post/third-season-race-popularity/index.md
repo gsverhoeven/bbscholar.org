@@ -12,8 +12,7 @@ categories:
 tags:
 - Python
 - Selenium
-baseurl: https://gsverhoeven.github.io
-image: bb_gnome_banner.png
+baseurl: https://bbscholar.org
 preview: false
 ---
 

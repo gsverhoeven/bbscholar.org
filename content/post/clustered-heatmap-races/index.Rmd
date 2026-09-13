@@ -7,7 +7,6 @@ summary: "Restate my assumptions: If you graph the numbers of any system, patter
 slug: blood-bowl-cluster-heatmap
 draft: no
 categories:
-- Blood Bowl
 - Clustering
 - Statistics
 tags:
@@ -15,7 +14,7 @@ tags:
 - hclust
 - heatmap
 baseurl: https://bbscholar.org
-image: bb_heatmap_banner.png
+image: bb_scatterplot_banner.png
 preview: no
 ---
 ```{r setup, include=FALSE}
