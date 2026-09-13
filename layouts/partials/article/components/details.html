@@ -21,9 +21,9 @@
             </a>
         </h2>
     
-        {{ with $Page.Params.description }}
+        {{ with $Page.Params.summary }}
         <h3 class="article-subtitle">
-            {{ . }}
+            {{ . | markdownify }}
         </h3>
         {{ end }}
     </div>
