@@ -3,7 +3,7 @@ title: "Nufflytics: Analyzing Blood Bowl matches from FUMBBL using Python"
 author: "Gertjan Verhoeven"
 date: '2022-03-20'
 summary: This blogpost is about **Blood Bowl**, a boardgame I started playing last year. The idea of this blog post is to showcase some possible analyses that can be done on the FUMBBL match data I've compiled.
-slug: blood-bowl-nufflytics
+slug: fumbbl-nufflytics
 draft: no
 categories: 
 - Data science
