@@ -1,6 +1,16 @@
 ---
 title: "The meta after one year Third Season: has it stabilized?"
-format: html
+author: "Gertjan Verhoeven"
+date: "2026-10-18"
+summary: This post is about the impact of Third Season aka BB2025 on NAF ranked Tabletop tournament play. In particular, we focus on whether the meta has stabilized.
+slug: "naf-changing-meta"
+draft: false
+categories:
+- Meta, NAF
+tags:
+- Time series
+baseurl: "https:/bbscholar.org"
+image: "banner.jpg"
 editor: source
 ---
 
@@ -8,13 +18,19 @@ This post is about the impact of Third Season aka BB2025 on NAF ranked Tabletop 
 
 Then, we go beyond the "before / after" changes and look at how team popularity has changed over time in the last year. And try to answer the question, did the meta stabilize yet? Or is the meta still in flux, with people learning, changing their behavior, tournament rulesets and tierings adapting?
 
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE, message = FALSE, warning = FALSE
+)
+```
+
 # The data: NAF tabletop
 
 We look at NAF table top tournaments for the BB2020 and BB2025 variants.
 
 I wrote a script that pulls the nightly NAF data dump, and transforms this into a dataset ready for analysis.
 
-```{r}
+```{r echo = FALSE, message = FALSE , warning = FALSE}
 # # dataprep
 library(tidyverse)
 source("code/make_plot.R")
