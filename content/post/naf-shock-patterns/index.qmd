@@ -1,236 +1,125 @@
 ---
-title: "naf-shock-patterns"
+title: "The meta after one year Third Season: has it stabilized?"
 format: html
-editor: visual
+editor: source
 ---
 
-This post is about the impact of Third Season aka BB2025 on NAF ranked Tabletop tournament play. In particular, we focus on the effect on team popularity. We go beyond the "before / after" changes and look at how the **shock** of a new ruleset, all the roster changes have at on race popularity over time, after the shock in November 2025. In doing so we automatically include a big after shock, the new High Elf roster in march 2026.
+This post is about the impact of Third Season aka BB2025 on NAF ranked Tabletop tournament play. In particular, we focus on whether the meta has stabilized. First, we compare two points in time: the current meta (september 2026) compared to one year ago. The meta one year ago was pretty stable, as we will see if we look at monthly data over the past few years. Then in November 2025 the proverbial "Season 3" rock was thrown in the pond, and one year later, here we are. Some big meta changes have occured.
+
+Then, we go beyond the "before / after" changes and look at how team popularity has changed over time in the last year. And try to answer the question, did the meta stabilize yet? Or is the meta still in flux, with people learning, changing their behavior, tournament rulesets and tierings adapting?
+
+# The data: NAF tabletop
+
+We look at NAF table top tournaments for the BB2020 and BB2025 variants.
 
 I wrote a script that pulls the nightly NAF data dump, and transforms this into a dataset ready for analysis.
 
 ```{r}
 # # dataprep
 library(tidyverse)
-source("make_plot.R")
+source("code/make_plot.R")
 fullrun <- 0
 
 if(fullrun){
-  source("dataprep.R")
+  source("code/dataprep.R")
   saveRDS(df, file = "data/naf_df.rds")
 } else{
   df <- readRDS("data/naf_df.rds")
 }
+```
 
-df %>%
+# Rapid shift to new ruleset
+
+So how did the tournament organizers respond to Season 3? Lets plot monthly game volume for both Season 2 and Season 3.
+
+```{r message = FALSE}
+resz <- df %>%
   group_by(variantid, year, month_date, variantname) %>%
-  filter(year > 2024) %>%
+  filter(year > 2024 & variantid %in% c(13,15) & gamedate_ok ==1) %>%
   summarise(n_games = n()/2)
+
+ggplot(resz, aes (x = month_date, y = n_games, col = factor(variantname))) + geom_point() + geom_line() +
+  ggtitle("NAF games played by month by variant") + labs(x ="month", y = "NAF games played")
 ```
 
-First let's start with the current state of affairs at time of writing. In 2026, about 5000 NAF ranked games are played each month. September 2026 is the most recent, roughly complete month that we can analyse. As each game has two teams participating, we have about 10000 game-weighted team observations. If all races are roughly equally popular, this translates to 100% / 31 teams = 3% share per race. And about 300 games per team. This is sufficient to compute a relatively stable % share for each team.
+In 2025-2026, about 5000 NAF ranked games are played each month. We can see that the transition of tournaments to the new ruleset was quite fast, in roughly two months time (dec '25 - jan '26) all tournaments had switched to the new ruleset. No gradual shift, but BAM, let's all move to Third Season.
 
-# The NAF BB2025 Tournament meta in September 2026
+# The current meta: what has changed?
 
-```{r}
-mm26 <- df %>%
-  filter(variantname == "Blood Bowl 2025" & month_date == as.Date("2026-09-01")) %>%
-  group_by(name) %>%
-  summarise(n_games = n()) %>%
-  arrange(-n_games) %>%
-  mutate(sort_order = 1:n()) %>%
-  select(name, n_games, sort_order)
+September 2026 is the most recent, roughly complete month that we can analyse. As each game has two teams participating, we have about 5000 x 2 = 10000 team picks observations. If all races are roughly equally popular, this translates to about 300 games per team, with a percentage share of 3%. A quick and dirty statistical power analysis shows that this is sufficient sample size to result in relatively stable % share average for each team.
 
-ggplot(mm26, aes(x = reorder(name, n_games), y = n_games)) +
-         geom_point() + expand_limits(y=0) + coord_flip() + ggtitle("# NAF games played by team in September 2026")
+```{r warning = FALSE, message = F}
+source("code/prep_meta.R")
+
+ggplot(mm, aes(x = reorder(name, -sort_order))) +
+         geom_linerange(aes(ymin = blood_bowl_2020, ymax = blood_bowl_2025, color = delta_color)) +
+         geom_point(aes(y = blood_bowl_2020), color = "grey") +
+         geom_point(aes(y = blood_bowl_2025)) +  
+         expand_limits(y=0) + coord_flip() + ggtitle("Changes in NAF Tournament meta September 2026 vs 2025") +
+  theme(legend.position = "none") + labs(y = "% Percentage share of games", x = "Team") 
 ```
 
-# Third season: throwing a rock in a pond
+Big increases in popularity are seen for High Elves, Human, Dark Elf, Nurgle, and OWA. Big decreases in popularity are seen for Shambling Undead, Dwarf, Vampire and Amazons.
 
-We approach the analysis as the effect of a shock over time. Like throwing a rock in a pond. The system is thrown out of equilibrium. It takes time to respond, to adapt to the change. Here we examine the time scales involved. We have seen that monthly game volumes give us sufficient statistics to calculate shares for the 31 races. So let's restrict ourselves to a window of 9 months before the shock, and 9 months after.
+# So ... did it stabilize?
+
+To see whether the meta stabilized, we look how the monthly team shares develop over time since the introduction of Season 3. As a control to what the monthly changes were before Season 3, I include a period of 18 months of Season 2 as well.
 
 ```{r message = F , warning = F}
-res <- df %>%
-  filter(month_date > as.Date("2023-12-31") & month_date < as.Date("2026-10-01") & variantname %in% c("Blood Bowl 2020","Blood Bowl 2025") & gamedate_ok == 1) %>%
-  #filter(country == "Netherlands") %>%
-  group_by(year, month_date,  name, variantname) %>%
-  summarize(n_games = n_distinct(coach_name)) %>%
-  ungroup() %>%
-  group_by(year, month_date, variantname) %>%
-  mutate(total_games = sum(n_games)) %>%
-  mutate(share = n_games/total_games)
-
-res <- res %>%
-  filter(!(year == 2026 & variantname == "Blood Bowl 2020"))
-
-res <- res %>%
-  left_join(mm26 %>% select(name, sort_order), join_by("name"))
-
-res$sort_name <- reorder(res$name, res$sort_order)
+source("code/prep_time.R")
 ```
+
+Short answer, no. Some of the big swings in the data have clearly not stabilized yet. This is clearly visible for the team plotted below. Among these are big movers such as **Nurgle**, **OWA** and **Humans**, but also less popular teams such as **Elf Union** and **Slann**.
 
 To "guide the eye" , I fitted a weighted robust second order linear fit through the aggregated data, before and after the introduction of Third season in late 2025.
 
-I present the results by pattern.
-
-Roughly there are six patterns, together with unique stories of three teams.
-
 ```{r}
-# * Little effect: unshaken
-small_eff <- c(7, 9, 20, 21, 22)
+tmp_res <- res %>% filter(share < 0.25 & name %in% c("Nurgle", "Tomb Kings", "Old World Alliance", "Orc", "Slann", "Elf Union", "Dark Elf", "Human"))
 
-#*  instant pos effect with (partial) bounce back
-pos_eff_bb <- c(6, 10, 11, 17, 19, 26, 31)
+tmp_res <- tmp_res %>% 
+  filter(month_date > as.Date("2024-06-01")) 
 
-#*  inst drop with (partial) bounce back
-neg_eff_bb <- c(14, 16, 18, 23, 25, 28, 30)
-
-#* Instant neg effect without bounce back
-inst_eff_no_bb <- c(24, 27, 29)
-
-#* Gradual effect with bounce back
-grad_bb <-c(5, 13, 15)
-
-# * Something else 
-smth_else <- c(3, 4,  12)
-
-all <- c(1,2,8, small_eff, pos_eff_bb, neg_eff_bb, inst_eff_no_bb, grad_bb, smth_else)
+make_plot(tmp_res, quadratic = T, ncol = 4)
 ```
 
-First, there are some teams that have a story of their own.
+# A second rock in the pond: the new High Elf roster
 
-# High elf & Bretonnians: the new roster effect
+When Season 3 was introduced, the **High Elf** roster was not in the rulebook, but included as separate document "Teams of Legend" . In Season 2, High Elf was not a popular roster at tournaments, and Season 3 did nothing to change that.
 
-**High Elf** popularity exploded after the new roster was released in march 2026, and are currently (september 2026) the most popular team together with **Orcs**. **Bretonnians** were newly introduced with the Third season edition, and have a solid popularity at 3-4%.
+Then, the team's popularity exploded after the new roster was released in march 2026, and **High Elfs** are currently (September 2026) the most popular team together with **Orcs**.
 
 ```{r}
-tmp_res <- res %>% filter(share < 0.25 & sort_order %in% c(2) )
+tmp_res <- res %>% filter(share < 0.25 & name %in% c("High Elf") & month_date > as.Date("2024-06-01"))
 
 tmp_res <- tmp_res %>% 
   mutate(new_roster = if_else(month_date > as.Date("2026-03-01"), 1, 0))
 
-p1 <- make_plot(data = tmp_res, smoothing_group_var = "new_roster", quadratic = T)
-
-tmp_res <- res %>% filter(share < 0.25 & sort_order %in% c(8) )
-
-p2 <- make_plot(data = tmp_res)
-
-library(patchwork)
-
-p1 + p2
+make_plot(data = tmp_res, smoothing_group_var = "new_roster", quadratic = F)
 ```
 
-# Orcs: up and down
+# Signs of stabilization
 
-**Orcs**, that already were the most popular team in BB2020, became even more popular, surging to an all time high of 10% share of coaches picking Orcs for their tournaments in early 2026. However the observed trend indicates that popularity is dropping again, approach their (still very high) pre-BB2025 levels.
+A few teams show "shock" effects that have stabilized, some to pre-shock levels, but also at lower or higher levels.
 
-```{r fig.width = 5}
-tmp_res <- res %>% filter(share < 0.25 & sort_order %in% 1)
+```{r}
+tmp_res <- res %>% filter(share < 0.25 & name %in% c("Imperial Nobility", "Wood Elf", "Underworld Denizens", "Amazon", "Halfling", "Gnome", "Vampire", "Dwarf"))
 
-p1 <-  make_plot(data = tmp_res, quadratic = T)
+tmp_res <- tmp_res %>% 
+  filter(month_date > as.Date("2024-06-01")) 
 
-p1
+make_plot(tmp_res, quadratic = T, ncol = 3)
 ```
 
 # Shaken, but not stirred
 
-There are several races that have virtually not changed at all in popularity.
-
-**Chaos Dwarf** show little effect of the new edition.
-
-- **Black Orcs** and **Goblins** appear unaffected,
-
-- Both **Skaven** and **Lizardmen** transitioned to BB2025 without visible changes in popularity, both showing a slight decreasing trend that was already there before the new edition.
+Finally, there are several races that have virtually not changed at all in popularity. Among these, we have **Chaos Dwarf**, **Black Orcs** , **Goblins** **Skaven** and **Lizardmen** .
 
 ```{r}
 tmp_res <- res %>% filter(share < 0.25 & sort_order %in% small_eff)
 
 make_plot(tmp_res, ncol = 3)
-
 ```
 
-# Instant drop, no bounce back (Vampire, Amazon, Chaos Renegade)
+# In conclusion: Did the dust settle?
 
-**Amazons** drop substantially, without sign of recovery. 
-As do **Vampires**, dropping from 5% to below 2%. 
-**Chaos Renegade** shows an instant and stable drop in popularity.
-
-```{r}
-tmp_res <- res %>% filter(share < 0.25 & sort_order %in% inst_eff_no_bb)
-
-tmp_res <- tmp_res %>% 
-  filter(month_date > as.Date("2024-06-01")) 
-
-make_plot(tmp_res)
-```
-
-# Instant surge with bounce back
-
-Here the patterns show "shock" effects that slowly return to pre-shock levels. 
-
-this pattern is visible for **Wood Elf** , and **Nurgle**.
-
-- **Imperial Nobility** show an initial surge followed by a return to pre-shock levels
-
-- **Old World Alliance** saw a huge increase to 8%, followed by a subsequent decrease, but still remain more popular than in BB2020
-
-- **Tomb Kings** initially increased in popularity, but that effect is fading away in the last few months.
-
-- **Underworld Denizens** show, after an initial clear increase, a slightly higher stable popularity at 2%.
-
-```{r}
-tmp_res <- res %>% filter(share < 0.25 & sort_order %in% pos_eff_bb)
-
-tmp_res <- tmp_res %>% 
-  filter(month_date > as.Date("2024-06-01")) 
-
-make_plot(tmp_res, quadratic = T)
-```
-
-# Instant drop with partial bounce back
-
-- **Slann** managed to survive the transition to BB2025 thanks to the NAF, that introduced a BB2025 compatible roster for them in january 2026. Since then they have climbed back to there old popularity levels at 2%.
-
-- **Dwarfs** show a big drop in popularity, with number of coaches dropping by half.
-
-- **Norse** are less popular as well, but appear to be recovering somewhat, possibly due to improved tiering.
-
-- **Gnomes** took a blow, with stable reduced popularity.
-
-**Elven Union**, **Halfling**
-
-```{r}
-tmp_res <- res %>% 
-  filter(share < 0.25 & sort_order %in% neg_eff_bb) %>% 
-  filter(month_date > as.Date("2024-06-01"))
-
-make_plot(tmp_res, quadratic= T)
-
-```
-
-# Gradual drop with bounce back
-
-```{r}
-tmp_res <- res %>% 
-  filter(share < 0.25 & sort_order %in% grad_bb) %>% 
-  filter(month_date > as.Date("2024-06-01"))
-
-make_plot(tmp_res, quadratic = T)
-```
-
-# Initial shock plus a new trend
-
-- **Humans** that in BB2020 were already showing a slow but steady upward trend, became more popular mid 2026.
-
-- **Dark Elves** after initially staying equal, show a slight increase in popularity.
-
-```{r}
-tmp_res <- res %>% 
-  filter(share < 0.25 & sort_order %in% smth_else) %>% 
-  filter(month_date > as.Date("2024-06-01"))
-
-make_plot(tmp_res, quadratic = T)
-```
-
-# Predicting the future
-
-Based on the patterns in the data, further increases can be expected for **Slann** and **Pro Elves**.
+Somewhat, but we're not there yet. From the monthly plots, it is clear that some teams are at a steady level, but others are still showing systematic monthly changes, as tournament rulesets adapt, people switch to new teams, people learn about the changes in Season 3 and respond.
