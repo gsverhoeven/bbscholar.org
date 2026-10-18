@@ -92,6 +92,7 @@ options(blogdown.method = "markdown")
 #blogdown:::build_rmds("content/post/third-season-race-popularity/index.Rmd")
 #blogdown:::build_rmds("content/post/welsh-nationals/index.Rmd")
 #blogdown:::build_rmds("content/post/throw-teammate-flowchart/index.Rmd")
+blogdown:::build_rmds("content/post/naf-changing-meta/index.Rmd")
 # rebuild site
 
 #The function blogdown::build_site() has an argument local that defaults to FALSE, which means building the website for publishing instead of local previewing
