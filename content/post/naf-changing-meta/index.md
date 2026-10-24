@@ -14,9 +14,13 @@ image: "banner.jpg"
 editor: source
 ---
 
-This post is about the impact of Third Season aka BB2025 on NAF ranked Tabletop tournament play. In particular, we focus on whether the meta has stabilized. First, we compare two points in time: the current meta (september 2026) compared to one year ago. The meta one year ago was pretty stable, as we will see if we look at monthly data over the past few years. Then in November 2025 the proverbial "Season 3" rock was thrown in the pond, and one year later, here we are. Some big meta changes have occured.
+***UPDATE**: we made it to One World One Blood Bowl (OWOBB) episode #79. Check it out [here](https://www.twitch.tv/videos/2904500922)*
 
-Then, we go beyond the "before / after" changes and look at how team popularity has changed over time in the last year. And try to answer the question, did the meta stabilize yet? Or is the meta still in flux, with people learning, changing their behavior, tournament rulesets and tierings adapting?
+***UPDATE2**: a PDF with all 31 team plots is available [here](all_team_popularity_plots.pdf)*
+
+This post is about the impact of Third Season aka BB2025 on NAF ranked Tabletop tournament play. In particular, we focus on whether the meta has stabilized. First, we compare two points in time: the current meta (remember 2026) compared to one year ago. The meta one year ago was pretty stable, as we will see if we look at monthly data over the past few years. In November 2025 the proverbial Season 3 "rock" was thrown in the pond, and one year later, here we are. Some big meta changes have occurred.
+
+So did the meta stabilize yet? Or is the meta still in flux, with people learning, changing their behavior, tournament rulesets and tierings adapting? To answer this question we go beyond the "before / after" changes and look at how team popularity has changed over time in the last year.
 
 
 
@@ -41,6 +45,8 @@ In 2025-2026, about 5000 NAF ranked games are played each month. We can see that
 September 2026 is the most recent, roughly complete month that we can analyse. As each game has two teams participating, we have about 5000 x 2 = 10000 team picks observations. If all races are roughly equally popular, this translates to about 300 games per team, with a percentage share of 3%. A quick and dirty statistical power analysis shows that this is sufficient sample size to result in relatively stable % share average for each team.
 
 <img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-4-1.png" alt="" width="672" />
+
+*Legend to this plot: black dot is % share of NAF tabletop games played for each team in September 2026 (Season 3). Grey dot is the same but for September 2025 (Season 2). increases are colored turquoise, decreases are colored red.*
 
 Big increases in popularity are seen for High Elves, Human, Dark Elf, Nurgle, and OWA. Big decreases in popularity are seen for Shambling Undead, Dwarf, Vampire and Amazons.
 
@@ -79,3 +85,5 @@ Finally, there are several races that have virtually not changed at all in popul
 # In conclusion: Did the dust settle?
 
 Somewhat, but we're not there yet. From the monthly plots, it is clear that some teams are at a steady level, but others are still showing systematic monthly changes, as tournament rulesets adapt, people switch to new teams, people learn about the changes in Season 3 and respond.
+
+
