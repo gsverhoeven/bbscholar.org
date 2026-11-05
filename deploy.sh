@@ -83,8 +83,8 @@ fi
 
 echo "Compressing '$SOURCE_FOLDER' into '$LOCAL_FILE'..."
 
-# Perform recursive compression (-r)
-zip -r "$LOCAL_FILE" "$SOURCE_FOLDER"
+# Perform recursive compression (-r), use FileSync to mirror contents of public folder
+zip -FS -r "$LOCAL_FILE" "$SOURCE_FOLDER"
 
 
 # 1. Transfer the zip file to the remote server
