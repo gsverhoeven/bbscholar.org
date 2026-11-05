@@ -96,7 +96,7 @@ Only variation is some coaches putting block on flesh golems.
 ![](rosters_welsh_nationals//wood_elf_welsh.png)
 
 Here the choice is bringing a **tree** or not. Best scoring coaches all brought a tree. 
-Comparing with my last [roster analysis three years ago done on EB2023 ruleset rosters](https://bbscholar.org/fumbbl-roster-plots/), we see that the classic top Wood Elf roster is:
+Comparing with my last [roster analysis three years ago done on EB2023 ruleset rosters](https://bbscholar.org/p/blood-bowl-eurobowl-rosters/), we see that the classic top Wood Elf roster is:
 
 * giving war dancers **tackle** and **strip ball**, 
 * a **tree**, 
