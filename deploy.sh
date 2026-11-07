@@ -20,10 +20,15 @@ fi
 # 3. Read single parameters
 # Note: Use the '-r' flag to output "raw" strings (removes JSON quotes)
 SOURCE_FOLDER=$(jq -r '.SOURCE_FOLDER' "$CONFIG_FILE")
+# SCP
 LOCAL_FILE=$(jq -r '.LOCAL_FILE' "$CONFIG_FILE")
 REMOTE_USER=$(jq -r '.REMOTE_USER' "$CONFIG_FILE")
 REMOTE_HOST=$(jq -r '.REMOTE_HOST' "$CONFIG_FILE")
 TARGET_DIR=$(jq -r '.TARGET_DIR' "$CONFIG_FILE")
+# SSH
+TARGET_DIR2=$(jq -r '.TARGET_DIR2' "$CONFIG_FILE")
+LOCAL_DIR2=$(jq -r '.LOCAL_DIR2' "$CONFIG_FILE")
+PORT=$(jq -r '.PORT' "$CONFIG_FILE")
 
 # CLEAN:
 
@@ -99,4 +104,16 @@ else
     exit 1
 fi
 
+# 2. Connect via SSH, unzip the file, and remove the remote zip archive
+
+echo "🔓 Unpacking zip file .."
+ssh -p $PORT "${REMOTE_USER}@${REMOTE_HOST}" -T "unzip -o $LOCAL_FILE && rm -r $TARGET_DIR2 && mv $LOCAL_DIR2 $TARGET_DIR2"
+
+# Check if the SSH command succeeded
+if [ $? -eq 0 ]; then
+    echo "🎉 Deployment successful!"
+else
+    echo "❌ Error: Failed to unzip file on the remote server."
+    exit 1
+fi
 
