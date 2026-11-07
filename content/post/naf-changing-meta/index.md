@@ -14,7 +14,7 @@ image: "banner.jpg"
 editor: source
 ---
 
-***UPDATE**: we made it to One World One Blood Bowl (OWOBB) episode #79. Check it out [here](https://www.twitch.tv/videos/2904500922)*
+***UPDATE**: we made it to One World One Blood Bowl (OWOBB) episode #79. Check it out [on Youtube](https://youtu.be/LZpfTeFwbpM?si=TchN-13eJJqIYCed&t=963) or [on Twitch](https://www.twitch.tv/videos/2904500922)*
 
 ***UPDATE2**: a PDF with all 31 team plots is available [here](all_team_popularity_plots.pdf)*
 
@@ -78,7 +78,7 @@ A few teams show "shock" effects that have stabilized, some to pre-shock levels,
 
 # Shaken, but not stirred
 
-Finally, there are several races that have virtually not changed at all in popularity. Among these, we have **Chaos Dwarf**, **Black Orcs** , **Goblins** **Skaven** and **Lizardmen** .
+Finally, there are several races that have virtually not changed at all in popularity. Among these, we have **Chaos Dwarf**, **Black Orcs** , **Goblins**, **Skaven** and **Lizardmen** .
 
 <img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-9-1.png" alt="" width="672" />
 

@@ -26,7 +26,7 @@ Painted during the summer months of 2026, ready for league start in September. P
 
 <img src="{{< blogdown/postref >}}teams/tomb_kings.JPG" alt="" width="672" />
 
-This is the infamous metal 5th Khemri team, consisting of many small metal components that need to be filed, drilled, and glued together (a process which I actually really enjoyed).
+This is the infamous GW metal 5th edition Khemri team, consisting of many small metal components that need to be filed, drilled, and glued together (a process which I actually really enjoyed).
 Assembly started in December 2023. Started painting skellies, but got stuck.
 In their unpainted state these were known in the B.I.G. League as Osiris Oldhammerers.
 Picked these up again almost two years later with Third Season in December 2025, and finished them in March 2026.
@@ -91,7 +91,7 @@ This team was bought already painted from a French coach, I completed it with a 
 <img src="{{< blogdown/postref >}}teams/lizardmen.JPG" alt="" width="672" />
 
 Bought in august 2021. Assembled in february 2022, started with painting in November 2022. 
-Introduction to modern GW plastic, GW contrast paints and static grass basing. 
+Introduction to modern GW plastic, GW contrast paints and static grass basing. The Fanath Big Lizard model is perfect as Kroxigor for this team.
 Played at a few tournaments under such names as "Run Skink MC - Tougher than Leather" or "Ancestral Resurrection" to appeal to their dino vibe.
 
 # August 2021 Humans
