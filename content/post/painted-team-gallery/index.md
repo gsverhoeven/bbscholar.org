@@ -1,7 +1,7 @@
 ---
 title: "Painted Blood Bowl Team Gallery"
 author: "Gertjan Verhoeven"
-date: "2026-10-18"
+date: "2026-11-19"
 summary: This post showcases my painted Blood Bowl teams, tracking painting progress through the years.
 slug: "painted-team-gallery"
 draft: false
@@ -13,6 +13,16 @@ baseurl: "https:/bbscholar.org"
 image: "banner.JPG"
 editor: source
 ---
+
+# November 2026: Slann
+
+<img src="{{< blogdown/postref >}}teams/slann2025.jpeg" alt="" width="672" />
+
+This is the Frogs team [from Fanath](https://fanathminiatures.com/product/frogs-team-18/), brought home as a souvenir from the 2023 World cup in Alicante. 
+With the World Cup 2027 in Malta coming up, I decided it was finally time to paint them up.
+I used the skin color (together with a lot of gold paint !) to unify the team appearance, and picked colors for cloth/feathers to identify the positionals.
+Blitzers red, catchers yellow, linefrogs purple (had to repurpose one blitzer to lineman to have 9 linemen). Used my new Armypainter fanatic paints for the skin tone, going from deep dark green (Angel green) to Wild green to vibrant Afterglow.
+
 
 # September 2026: Imperial Nobility
 
