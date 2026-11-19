@@ -80,41 +80,17 @@ find "${find_args[@]}" -print0 | xargs -0 rm -f
 
 echo "Cleanup complete!"
 
-# --- EXECUTION ---
-# Ensure the zip command utility is installed
-if ! command -v zip &> /dev/null; then
-    echo "Error: 'zip' utility is not installed. Please install it first (e.g., sudo apt install zip)."
-    exit 1
-fi
+echo "Syncing '$LOCAL_DIR2' to $REMOTE_HOST..."
+rsync -avz -e "ssh -p $PORT" $LOCAL_DIR2 "${REMOTE_USER}@${REMOTE_HOST}:${TARGET_DIR2}/"
 
-echo "Compressing '$SOURCE_FOLDER' into '$LOCAL_FILE'..."
-
-# Perform recursive compression (-r), use FileSync to mirror contents of public folder
-zip -FS -r "$LOCAL_FILE" "$SOURCE_FOLDER"
-
-
-# 1. Transfer the zip file to the remote server
-echo "📦 Transferring $LOCAL_FILE to $REMOTE_HOST..."
-scp "$LOCAL_FILE" "${REMOTE_USER}@${REMOTE_HOST}:${TARGET_DIR}/"
-
-# Check if the transfer was successful
-if [ $? -eq 0 ]; then
-    echo "✅ Transfer complete."
-else
-    echo "❌ Error: SCP transfer failed."
-    exit 1
-fi
-
-# 2. Connect via SSH, unzip the file, and remove the remote zip archive
-
-echo "🔓 Unpacking zip file .."
-ssh -p $PORT "${REMOTE_USER}@${REMOTE_HOST}" -T "unzip -o $LOCAL_FILE && rm -r $TARGET_DIR2 && mv $LOCAL_DIR2 $TARGET_DIR2"
-
-# Check if the SSH command succeeded
+# Check if the sync was successful
 if [ $? -eq 0 ]; then
     echo "🎉 Deployment successful!"
 else
-    echo "❌ Error: Failed to unzip file on the remote server."
+    echo "❌ Error: Sync failed."
     exit 1
 fi
+
+
+
 
